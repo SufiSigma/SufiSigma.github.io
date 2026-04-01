@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SufiSigma | Pro Tips</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0a0a;--bg2:#111111;--bg3:#181818;--accent:#FFD700;--accent2:#FFA500;--text:#f0f0f0;--muted:#888;--border:#2a2a2a}
+  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,215,0,0.15)}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 6px rgba(255,215,0,0.4))}
+  .nav-links{display:flex;gap:0.3rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:0.45rem 0.9rem;border:1px solid transparent;transition:all 0.2s}
+  .nav-links a:hover,.nav-links a.active{color:#000;background:var(--accent);border-color:var(--accent)}
+  .page-hero{padding:6rem 2rem 3rem;background:var(--bg2);position:relative;overflow:hidden}
+  .hero-grid{position:absolute;inset:0;opacity:0.07;background-image:linear-gradient(rgba(255,215,0,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,215,0,0.6) 1px,transparent 1px);background-size:55px 55px;transform:perspective(700px) rotateX(58deg) translateY(-30%);transform-origin:bottom;pointer-events:none}
+  .page-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+  .page-label{font-size:0.75rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+  .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,9rem);line-height:0.88;text-shadow:3px 3px 0 #8B6914,6px 6px 0 #5a4510,8px 8px 15px rgba(0,0,0,0.7)}
+  .page-subtitle{font-size:1rem;color:var(--muted);margin-top:1rem;max-width:450px;line-height:1.7;font-weight:300}
+  main{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+  .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:4rem}
+  .tip-card{background:var(--bg3);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:all 0.3s}
+  .tip-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,#FFD700,#FFA500)}
+  .tip-card:hover{border-color:rgba(255,215,0,0.3);transform:translateY(-5px) rotateX(1deg);box-shadow:0 12px 30px rgba(255,215,0,0.07),3px 3px 0 #111}
+  .tip-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(255,215,0,0.05);position:absolute;top:0.5rem;right:1rem;line-height:1}
+  .tip-icon{font-size:2.5rem;margin-bottom:1rem}
+  .tip-title{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.8rem}
+  .tip-title span{background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .tip-text{font-size:0.88rem;color:var(--muted);line-height:1.7}
+  .section-divider{margin:0 0 2.5rem}
+  .section-label{font-size:0.75rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);line-height:1;text-shadow:2px 2px 0 #333}
+  .nutrition-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-bottom:4rem}
+  .nutrition-card{background:var(--bg3);border:1px solid var(--border);padding:1.8rem;transition:all 0.3s}
+  .nutrition-card:hover{border-color:rgba(255,215,0,0.3);transform:translateY(-4px)}
+  .nutrition-icon{font-size:2rem;margin-bottom:0.8rem}
+  .nutrition-title{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem;color:var(--accent)}
+  .nutrition-text{font-size:0.85rem;color:var(--muted);line-height:1.6}
+  .quote-block{padding:3.5rem 2rem;text-align:center;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:0 0 4rem}
+  .quote-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.15;max-width:750px;margin:0 auto;text-shadow:2px 2px 0 rgba(255,215,0,0.15)}
+  .quote-text span{background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .quote-author{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:1rem}
+  .mistakes-list{display:flex;flex-direction:column;gap:1rem}
+  .mistake-item{display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem;background:var(--bg3);border:1px solid var(--border);transition:all 0.3s}
+  .mistake-item:hover{border-color:rgba(255,215,0,0.2)}
+  .mistake-x{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#ff4444;min-width:2rem;line-height:1}
+  .mistake-content h4{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.3rem}
+  .mistake-content p{font-size:0.85rem;color:var(--muted);line-height:1.6}
+  footer{border-top:1px solid rgba(255,215,0,0.12);padding:2rem;text-align:center;color:var(--muted);font-size:0.82rem;letter-spacing:2px;text-transform:uppercase}
+  .footer-nav{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;list-style:none}
+  .footer-nav a{color:var(--muted);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+  .footer-nav a:hover{color:var(--accent)}
+  .gold{background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+  ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:linear-gradient(#FFD700,#FFA500)}
+  @media(max-width:600px){nav{padding:0.8rem 1rem}.nav-links a{padding:0.35rem 0.6rem;font-size:0.7rem;letter-spacing:1px}main{padding:3rem 1.2rem}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">SufiSigma</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plans.html">Plans</a></li>
+    <li><a href="tips.html" class="active">Tips</a></li>
+  </ul>
+</nav>
+<div class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="page-inner">
+    <div class="page-label">Train Smarter</div>
+    <h1 class="page-title">PRO<br>TIPS</h1>
+    <p class="page-subtitle">The difference between good and great is what you do between training sessions.</p>
+  </div>
+</div>
+<main>
+  <div class="tips-grid">
+    <div class="tip-card fade-in"><div class="tip-num">01</div><div class="tip-icon">🎯</div><div class="tip-title"><span>Master</span> Form First</div><p class="tip-text">Perfect form over high reps every single time. One clean rep is worth ten sloppy ones. Bad form creates injury, and injury stops all progress. Film yourself to check your form.</p></div>
+    <div class="tip-card fade-in"><div class="tip-num">02</div><div class="tip-icon">😴</div><div class="tip-title"><span>Rest</span> is Growth</div><p class="tip-text">Your muscles grow during sleep, not during training. 7-8 hours every night is your most powerful tool. Skipping rest for more training is the fastest way to go backwards.</p></div>
+    <div class="tip-card fade-in"><div class="tip-num">03</div><div class="tip-icon">📈</div><div class="tip-title"><span>Progressive</span> Overload</div><p class="tip-text">Add 1-2 reps, reduce rest time, or advance the exercise every single week. If nothing changes, nothing changes. Stagnation in training is the same as regression.</p></div>
+    <div class="tip-card fade-in"><div class="tip-num">04</div><div class="tip-icon">🔥</div><div class="tip-title"><span>Warm Up</span> Always</div><p class="tip-text">5-10 minutes of joint circles, light movement and mobility work before every session. Cold muscles tear. Warmed muscles perform. This is non-negotiable every single session.</p></div>
+    <div class="tip-card fade-in"><div class="tip-num">05</div><div class="tip-icon">📅</div><div class="tip-title"><span>Consistency</span> Wins</div><p class="tip-text">Training 3 days a week for an entire year beats 7 days for a month every time. Motivation gets you started. Discipline keeps you going. Show up even when you don't feel like it.</p></div>
+    <div class="tip-card fade-in"><div class="tip-num">06</div><div class="tip-icon">🧠</div><div class="tip-title"><span>Mind</span> Muscle Connection</div><p class="tip-text">Consciously squeeze the muscle you're working during every rep. Don't just go through motions — feel it working. This alone can double your progress over time.</p></div>
+  </div>
+  <div class="quote-block fade-in">
+    <p class="quote-text">Your body can <span>stand almost anything.</span> It's your mind you have to convince.</p>
+    <p class="quote-author">— The Foundation of Calisthenics</p>
+  </div>
+  <div class="section-divider">
+    <div class="section-label">Fuel Your Progress</div>
+    <h2 class="section-title">NUTRITION BASICS</h2>
+  </div>
+  <div class="nutrition-grid">
+    <div class="nutrition-card fade-in"><div class="nutrition-icon">🥩</div><div class="nutrition-title">Protein</div><p class="nutrition-text">Aim for 1.6-2g per kg of bodyweight daily. Protein repairs torn muscle fibers. Without enough protein, you won't grow no matter how hard you train.</p></div>
+    <div class="nutrition-card fade-in"><div class="nutrition-icon">🍚</div><div class="nutrition-title">Carbohydrates</div><p class="nutrition-text">Carbs are your primary fuel. Eat complex carbs like rice, oats and bread around training. Don't fear carbs — fear not having energy to train.</p></div>
+    <div class="nutrition-card fade-in"><div class="nutrition-icon">💧</div><div class="nutrition-title">Hydration</div><p class="nutrition-text">Drink 2.5-3 liters of water daily. Dehydration reduces strength by up to 20%. If you're thirsty, you're already dehydrated.</p></div>
+    <div class="nutrition-card fade-in"><div class="nutrition-icon">⏱️</div><div class="nutrition-title">Meal Timing</div><p class="nutrition-text">Eat a meal 1-2 hours before training. Have protein within 30-60 minutes after. Consistency in eating habits matters more than perfect timing.</p></div>
+  </div>
+  <div class="section-divider">
+    <div class="section-label">Learn From Mistakes</div>
+    <h2 class="section-title">COMMON MISTAKES</h2>
+  </div>
+  <div class="mistakes-list">
+    <div class="mistake-item fade-in"><div class="mistake-x">✗</div><div class="mistake-content"><h4>Skipping the basics</h4><p>Many beginners want to do muscle ups before they can do 10 clean pull ups. Master the foundations first. Every advanced skill is built on basics.</p></div></div>
+    <div class="mistake-item fade-in"><div class="mistake-x">✗</div><div class="mistake-content"><h4>Training every day</h4><p>More training does NOT equal more results. Rest days are when your muscles rebuild stronger. Overtraining leads to injury and burnout.</p></div></div>
+    <div class="mistake-item fade-in"><div class="mistake-x">✗</div><div class="mistake-content"><h4>Ignoring nutrition</h4><p>You cannot out-train a bad diet. If you're not eating enough protein, you are leaving 50% of your results on the table no matter how hard you train.</p></div></div>
+    <div class="mistake-item fade-in"><div class="mistake-x">✗</div><div class="mistake-content"><h4>Comparing your progress</h4><p>Everyone's body responds differently. Focus on beating your own previous records, not someone else's timeline.</p></div></div>
+    <div class="mistake-item fade-in"><div class="mistake-x">✗</div><div class="mistake-content"><h4>Quitting too soon</h4><p>Real results in calisthenics take 6-12 months of consistent training. Most people quit in the first 4-6 weeks. The ones who stay are the ones who transform.</p></div></div>
+  </div>
+</main>
+<footer>
+  <ul class="footer-nav"><li><a href="index.html">Home</a></li><li><a href="plans.html">Plans</a></li><li><a href="tips.html">Tips</a></li></ul>
+  <p>Built by <span class="gold">SufiSigma</span> · No Gym. No Excuses.</p>
+</footer>
+<script>
+  const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

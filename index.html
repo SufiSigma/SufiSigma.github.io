@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SufiSigma | Calisthenics Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0a0a0a;--bg2:#111111;--bg3:#181818;--accent:#FFD700;--accent2:#FFA500;--text:#f0f0f0;--muted:#888;--border:#2a2a2a; }
+  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,215,0,0.15)}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 6px rgba(255,215,0,0.4))}
+  .nav-links{display:flex;gap:0.3rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:0.45rem 0.9rem;border:1px solid transparent;transition:all 0.2s}
+  .nav-links a:hover,.nav-links a.active{color:#000;background:var(--accent);border-color:var(--accent)}
+  .hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:5rem 2rem 3rem;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(255,215,0,0.07) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(255,165,0,0.04) 0%,transparent 70%)}
+  .hero-grid{position:absolute;inset:0;opacity:0.07;background-image:linear-gradient(rgba(255,215,0,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,215,0,0.6) 1px,transparent 1px);background-size:55px 55px;transform:perspective(700px) rotateX(58deg) translateY(-30%);transform-origin:bottom;pointer-events:none}
+  .hero-content{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .hero-tag{display:inline-block;font-size:0.75rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:0.3rem 1rem;margin-bottom:1.5rem;animation:fadeUp 0.8s ease both;box-shadow:0 0 12px rgba(255,215,0,0.15)}
+  .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,16vw,11rem);line-height:0.88;letter-spacing:2px;animation:fadeUp 0.8s ease 0.1s both;text-shadow:3px 3px 0 #8B6914,6px 6px 0 #5a4510,8px 8px 15px rgba(0,0,0,0.7)}
+  .hero-title span{background:linear-gradient(135deg,#FFD700 0%,#FFA500 50%,#FFD700 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(3px 3px 0 #8B6914)}
+  .hero-subtitle{font-size:1.1rem;color:var(--muted);margin-top:1.5rem;max-width:400px;line-height:1.7;font-weight:300;animation:fadeUp 0.8s ease 0.2s both}
+  .hero-cta{display:inline-block;margin-top:2rem;padding:1rem 2.5rem;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all 0.25s;animation:fadeUp 0.8s ease 0.3s both;box-shadow:3px 3px 0 #8B6914}
+  .hero-cta:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #8B6914}
+  section{padding:5rem 2rem}
+  .section-inner{max-width:1200px;margin:0 auto}
+  .section-label{font-size:0.75rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);line-height:1;margin-bottom:3rem;text-shadow:2px 2px 0 #333,4px 4px 0 #1a1a1a}
+  #exercises{background:var(--bg2)}
+  .exercise-tabs{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+  .tab-btn{padding:0.6rem 1.4rem;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Barlow',sans-serif;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-weight:600}
+  .tab-btn:hover,.tab-btn.active{background:linear-gradient(135deg,#FFD700,#FFA500);border-color:var(--accent);color:#000;box-shadow:2px 2px 0 #8B6914}
+  .exercise-panel{display:none}.exercise-panel.active{display:block}
+  .exercise-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+  .exercise-card{background:var(--bg3);border:1px solid var(--border);padding:1.8rem;position:relative;overflow:hidden;transition:all 0.3s;cursor:pointer}
+  .exercise-card::before{content:'';position:absolute;bottom:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#FFD700,#FFA500);transition:width 0.3s}
+  .exercise-card:hover{border-color:var(--accent);transform:translateY(-5px) rotateX(1deg);box-shadow:0 12px 30px rgba(255,215,0,0.08),3px 3px 0 #111}
+  .exercise-card:hover::before{width:100%}
+  .card-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(255,215,0,0.06);position:absolute;top:1rem;right:1.2rem;line-height:1}
+  .card-level{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.8rem;font-weight:700}
+  .level-beginner{color:#00e676}.level-intermediate{color:#FFD700}.level-advanced{color:var(--accent2)}
+  .card-title{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.6rem;letter-spacing:1px}
+  .card-desc{font-size:0.88rem;color:var(--muted);line-height:1.6}
+  .card-muscles{margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem}
+  .muscle-tag{font-size:0.7rem;padding:0.2rem 0.6rem;border:1px solid rgba(255,215,0,0.2);color:rgba(255,215,0,0.55);letter-spacing:1px;text-transform:uppercase}
+  #gallery{background:var(--bg)}
+  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem}
+  .photo-box{aspect-ratio:4/3;background:var(--bg3);border:2px dashed rgba(255,215,0,0.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;transition:all 0.3s}
+  .photo-box:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 20px rgba(255,215,0,0.06)}
+  .photo-box span{font-size:2.5rem}.photo-box p{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  footer{border-top:1px solid rgba(255,215,0,0.12);padding:2rem;text-align:center;color:var(--muted);font-size:0.82rem;letter-spacing:2px;text-transform:uppercase}
+  .footer-nav{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;list-style:none}
+  .footer-nav a{color:var(--muted);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+  .footer-nav a:hover{color:var(--accent)}
+  .gold{background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+  ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:linear-gradient(#FFD700,#FFA500)}
+  @media(max-width:600px){nav{padding:0.8rem 1rem}.nav-links a{padding:0.35rem 0.6rem;font-size:0.7rem;letter-spacing:1px}section{padding:4rem 1.2rem}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">SufiSigma</div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="plans.html">Plans</a></li>
+    <li><a href="tips.html">Tips</a></li>
+  </ul>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Bodyweight Training</div>
+    <h1 class="hero-title">CALIS<br><span>THENICS</span><br>GUIDE</h1>
+    <p class="hero-subtitle">Master your body. No gym required. Build strength, control, and freedom through pure movement.</p>
+    <a href="#exercises" class="hero-cta">Start Training</a>
+  </div>
+</section>
+<section id="exercises">
+  <div class="section-inner">
+    <div class="section-label">Master These Moves</div>
+    <h2 class="section-title">EXERCISES</h2>
+    <div class="exercise-tabs">
+      <button class="tab-btn active" onclick="showTab('pushups',this)">Push Ups</button>
+      <button class="tab-btn" onclick="showTab('pullups',this)">Pull Ups</button>
+      <button class="tab-btn" onclick="showTab('dips',this)">Dips</button>
+      <button class="tab-btn" onclick="showTab('muscleup',this)">Muscle Up</button>
+      <button class="tab-btn" onclick="showTab('handstand',this)">Handstand</button>
+    </div>
+    <div class="exercise-panel active" id="pushups"><div class="exercise-grid">
+      <div class="exercise-card fade-in"><div class="card-num">01</div><div class="card-level level-beginner">Beginner</div><div class="card-title">Standard Push Up</div><div class="card-desc">The foundation. Builds overall chest, shoulder and tricep strength with perfect form.</div><div class="card-muscles"><span class="muscle-tag">Chest</span><span class="muscle-tag">Triceps</span><span class="muscle-tag">Shoulders</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">02</div><div class="card-level level-beginner">Beginner</div><div class="card-title">Wide Push Up</div><div class="card-desc">Hands wider than shoulder width. Shifts load to chest, reducing tricep involvement.</div><div class="card-muscles"><span class="muscle-tag">Chest</span><span class="muscle-tag">Front Delt</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">03</div><div class="card-level level-beginner">Beginner</div><div class="card-title">Diamond Push Up</div><div class="card-desc">Hands form a diamond shape. Maximum tricep activation possible.</div><div class="card-muscles"><span class="muscle-tag">Triceps</span><span class="muscle-tag">Inner Chest</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">04</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Decline Push Up</div><div class="card-desc">Feet elevated. Targets upper chest and shoulders more intensely.</div><div class="card-muscles"><span class="muscle-tag">Upper Chest</span><span class="muscle-tag">Shoulders</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">05</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Incline Push Up</div><div class="card-desc">Hands elevated. Targets lower chest. Great for progressive beginners.</div><div class="card-muscles"><span class="muscle-tag">Lower Chest</span><span class="muscle-tag">Triceps</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">06</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Pike Push Up</div><div class="card-desc">Hips high in inverted V shape. Gateway to handstand push ups.</div><div class="card-muscles"><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Triceps</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">07</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Archer Push Up</div><div class="card-desc">One arm extends to side while other bends. Builds one-arm push up strength.</div><div class="card-muscles"><span class="muscle-tag">Chest</span><span class="muscle-tag">Core</span><span class="muscle-tag">Triceps</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">08</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Clap Push Up</div><div class="card-desc">Explosive push with air time to clap. Builds power and fast-twitch fibers.</div><div class="card-muscles"><span class="muscle-tag">Chest</span><span class="muscle-tag">Explosive Power</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">09</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Pseudo Planche Push Up</div><div class="card-desc">Hands rotated backward, body leaning forward. Direct planche progression.</div><div class="card-muscles"><span class="muscle-tag">Chest</span><span class="muscle-tag">Front Delt</span><span class="muscle-tag">Core</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">10</div><div class="card-level level-advanced">Advanced</div><div class="card-title">One Arm Push Up</div><div class="card-desc">Pinnacle of push up mastery. Exceptional unilateral strength and core stability.</div><div class="card-muscles"><span class="muscle-tag">Full Body</span><span class="muscle-tag">Core</span><span class="muscle-tag">Chest</span></div></div>
+    </div></div>
+    <div class="exercise-panel" id="pullups"><div class="exercise-grid">
+      <div class="exercise-card fade-in"><div class="card-num">01</div><div class="card-level level-beginner">Beginner</div><div class="card-title">Dead Hang</div><div class="card-desc">Simply hang from the bar. Builds grip strength and decompresses the spine.</div><div class="card-muscles"><span class="muscle-tag">Grip</span><span class="muscle-tag">Lats</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">02</div><div class="card-level level-beginner">Beginner</div><div class="card-title">Negative Pull Up</div><div class="card-desc">Jump to top position and slowly lower down. Best for building pull up strength.</div><div class="card-muscles"><span class="muscle-tag">Lats</span><span class="muscle-tag">Biceps</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">03</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Standard Pull Up</div><div class="card-desc">Overhand grip, pull chest to bar. King of bodyweight back exercises.</div><div class="card-muscles"><span class="muscle-tag">Lats</span><span class="muscle-tag">Biceps</span><span class="muscle-tag">Rear Delt</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">04</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Chin Up</div><div class="card-desc">Underhand grip. Greater bicep activation compared to standard pull ups.</div><div class="card-muscles"><span class="muscle-tag">Biceps</span><span class="muscle-tag">Lats</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">05</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Archer Pull Up</div><div class="card-desc">One arm pulls, other extends sideways. Progression toward one-arm pull up.</div><div class="card-muscles"><span class="muscle-tag">Lats</span><span class="muscle-tag">Biceps</span><span class="muscle-tag">Core</span></div></div>
+    </div></div>
+    <div class="exercise-panel" id="dips"><div class="exercise-grid">
+      <div class="exercise-card fade-in"><div class="card-num">01</div><div class="card-level level-beginner">Beginner</div><div class="card-title">Bench Dip</div><div class="card-desc">Hands on bench behind you. Great intro to dip movement pattern.</div><div class="card-muscles"><span class="muscle-tag">Triceps</span><span class="muscle-tag">Chest</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">02</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Parallel Bar Dip</div><div class="card-desc">Classic dip between bars. Lean forward for chest, upright for triceps.</div><div class="card-muscles"><span class="muscle-tag">Chest</span><span class="muscle-tag">Triceps</span><span class="muscle-tag">Shoulders</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">03</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Korean Dip</div><div class="card-desc">Bar behind body dipping downward. Extreme shoulder mobility required.</div><div class="card-muscles"><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Triceps</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">04</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Ring Dip</div><div class="card-desc">On gymnastic rings. Unstable surface demands far more stabilizer activation.</div><div class="card-muscles"><span class="muscle-tag">Chest</span><span class="muscle-tag">Core</span><span class="muscle-tag">Triceps</span></div></div>
+    </div></div>
+    <div class="exercise-panel" id="muscleup"><div class="exercise-grid">
+      <div class="exercise-card fade-in"><div class="card-num">01</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Kipping Muscle Up</div><div class="card-desc">Use momentum to swing and transition over the bar. Good starting point.</div><div class="card-muscles"><span class="muscle-tag">Full Upper Body</span><span class="muscle-tag">Core</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">02</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Strict Muscle Up</div><div class="card-desc">No momentum. Pull explosively past the bar and press out. Elite level.</div><div class="card-muscles"><span class="muscle-tag">Lats</span><span class="muscle-tag">Chest</span><span class="muscle-tag">Triceps</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">03</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Ring Muscle Up</div><div class="card-desc">On gymnastic rings. Hardest variation requiring total body control.</div><div class="card-muscles"><span class="muscle-tag">Full Body</span><span class="muscle-tag">Stabilizers</span></div></div>
+    </div></div>
+    <div class="exercise-panel" id="handstand"><div class="exercise-grid">
+      <div class="exercise-card fade-in"><div class="card-num">01</div><div class="card-level level-beginner">Beginner</div><div class="card-title">Wall Handstand</div><div class="card-desc">Kick up against wall for support. Builds wrist strength and inversion comfort.</div><div class="card-muscles"><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Wrists</span><span class="muscle-tag">Core</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">02</div><div class="card-level level-intermediate">Intermediate</div><div class="card-title">Freestanding Handstand</div><div class="card-desc">Balance without any support. Requires months of consistent daily practice.</div><div class="card-muscles"><span class="muscle-tag">Full Body</span><span class="muscle-tag">Balance</span></div></div>
+      <div class="exercise-card fade-in"><div class="card-num">03</div><div class="card-level level-advanced">Advanced</div><div class="card-title">Handstand Push Up</div><div class="card-desc">Lower head to ground and press up while inverted. Ultimate shoulder strength.</div><div class="card-muscles"><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Triceps</span><span class="muscle-tag">Core</span></div></div>
+    </div></div>
+  </div>
+</section>
+<section id="gallery">
+  <div class="section-inner">
+    <div class="section-label">Progress & Journey</div>
+    <h2 class="section-title">GALLERY</h2>
+    <div class="photo-grid">
+      <div class="photo-box fade-in"><span>📸</span><p>Add your photo</p></div>
+      <div class="photo-box fade-in"><span>💪</span><p>Add your photo</p></div>
+      <div class="photo-box fade-in"><span>🏋️</span><p>Add your photo</p></div>
+      <div class="photo-box fade-in"><span>🔥</span><p>Add your photo</p></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plans.html">Plans</a></li>
+    <li><a href="tips.html">Tips</a></li>
+  </ul>
+  <p>Built by <span class="gold">SufiSigma</span> · No Gym. No Excuses.</p>
+</footer>
+<script>
+  function showTab(id,btn){document.querySelectorAll('.exercise-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');document.querySelectorAll('#'+id+' .fade-in').forEach((el,i)=>{el.classList.remove('visible');setTimeout(()=>el.classList.add('visible'),i*80)})}
+  const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+  setTimeout(()=>{document.querySelectorAll('#pushups .fade-in').forEach((el,i)=>setTimeout(()=>el.classList.add('visible'),i*80))},300);
+</script>
+</body>
+</html>
