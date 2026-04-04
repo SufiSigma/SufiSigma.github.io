@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SufiSigma | Master Calisthenics — The Ultimate eBook</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050505;
+  --bg2: #0c0c0c;
+  --bg3: #141414;
+  --gold: #FFD700;
+  --gold2: #FFA500;
+  --gold3: #B8860B;
+  --text: #f0f0f0;
+  --muted: #777;
+  --border: #1e1e1e;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed; width: 12px; height: 12px;
+  background: var(--gold); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(255,215,0,0.5); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+}
+
+/* PARTICLES */
+#particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,215,0,0.8), transparent);
+  animation: floatParticle linear infinite;
+  pointer-events: none;
+}
+@keyframes floatParticle {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(5,5,5,0.9); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,215,0,0.08);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 4px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(255,215,0,0.5));
+}
+.nav-cta {
+  padding: 0.6rem 1.8rem;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000; font-weight: 700; font-size: 0.8rem;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 0 20px rgba(255,215,0,0.3), 3px 3px 0 #8B6914;
+  transition: all 0.2s;
+}
+.nav-cta:hover { transform: translate(-2px,-2px); box-shadow: 0 0 30px rgba(255,215,0,0.5), 5px 5px 0 #8B6914; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; padding: 7rem 3rem 4rem; overflow: hidden;
+}
+.hero-3d-grid {
+  position: absolute; inset: 0; opacity: 0.06;
+  background-image: linear-gradient(rgba(255,215,0,1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,215,0,1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(600px) rotateX(60deg) translateY(-35%);
+  transform-origin: bottom center;
+}
+.hero-glow {
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,215,0,0.06) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:translateX(-50%) scale(1);opacity:0.5} 50%{transform:translateX(-50%) scale(1.2);opacity:1} }
+
+.hero-content { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero-left {}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(255,215,0,0.3);
+  padding: 0.4rem 1rem; margin-bottom: 2rem;
+  background: rgba(255,215,0,0.05);
+  animation: fadeUp 0.8s ease both;
+}
+.hero-badge::before { content:'★'; font-size:0.8rem; }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4.5rem, 10vw, 8rem);
+  line-height: 0.88; letter-spacing: 2px;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+.hero-title .line1 { display: block; color: var(--text); text-shadow: 3px 3px 0 #333, 6px 6px 0 #1a1a1a; }
+.hero-title .line2 {
+  display: block;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 40%, #FFD700 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(4px 4px 0 #8B6914) drop-shadow(0 0 30px rgba(255,215,0,0.3));
+}
+.hero-title .line3 { display: block; color: var(--text); text-shadow: 3px 3px 0 #333, 6px 6px 0 #1a1a1a; }
+.hero-desc { font-size: 1rem; color: var(--muted); margin-top: 1.5rem; line-height: 1.8; max-width: 420px; animation: fadeUp 0.8s ease 0.2s both; }
+.hero-price-row { display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; animation: fadeUp 0.8s ease 0.3s both; }
+.price-old { font-size: 1.2rem; color: var(--muted); text-decoration: line-through; }
+.price-new {
+  font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.price-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 0.8rem; margin-top: 1.5rem;
+  padding: 1.1rem 2.5rem;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000; font-weight: 700; font-size: 0.9rem;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 0 30px rgba(255,215,0,0.3), 4px 4px 0 #8B6914;
+  transition: all 0.25s; animation: fadeUp 0.8s ease 0.35s both;
+  position: relative; overflow: hidden;
+}
+.hero-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  opacity: 0; transition: opacity 0.2s;
+}
+.hero-btn:hover { transform: translate(-3px,-3px); box-shadow: 0 0 50px rgba(255,215,0,0.5), 7px 7px 0 #8B6914; }
+.hero-btn:hover::before { opacity: 1; }
+.hero-btn-arrow { font-size: 1.2rem; }
+.hero-trust { display: flex; gap: 2rem; margin-top: 2rem; animation: fadeUp 0.8s ease 0.4s both; }
+.trust-item { display: flex; flex-direction: column; }
+.trust-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; background: linear-gradient(135deg,#FFD700,#FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+.trust-label { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+
+/* EBOOK 3D MOCKUP */
+.hero-right { display: flex; justify-content: center; align-items: center; animation: fadeUp 0.8s ease 0.2s both; }
+.book-3d {
+  width: 280px; height: 380px; position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateY(-25deg) rotateX(5deg);
+  animation: bookFloat 6s ease-in-out infinite;
+  filter: drop-shadow(0 40px 60px rgba(255,215,0,0.2));
+}
+@keyframes bookFloat {
+  0%,100%{transform:perspective(1200px) rotateY(-25deg) rotateX(5deg) translateY(0)}
+  50%{transform:perspective(1200px) rotateY(-22deg) rotateX(3deg) translateY(-20px)}
+}
+.book-front {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #1a1400 0%, #0a0800 100%);
+  border: 1px solid rgba(255,215,0,0.3);
+  box-shadow: inset 0 0 40px rgba(255,215,0,0.05);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 2.5rem 2rem; overflow: hidden;
+}
+.book-front::before {
+  content: ''; position: absolute; inset: 8px;
+  border: 1px solid rgba(255,215,0,0.15);
+  pointer-events: none;
+}
+.book-front::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+}
+.book-icon { font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 20px rgba(255,215,0,0.5)); }
+.book-title-cover {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 3px;
+  text-align: center; line-height: 1;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: none; filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));
+  margin-bottom: 0.5rem;
+}
+.book-subtitle-cover { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,215,0,0.5); text-align: center; }
+.book-divider { width: 60px; height: 1px; background: linear-gradient(90deg,transparent,#FFD700,transparent); margin: 1rem auto; }
+.book-author { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,215,0,0.4); }
+.book-spine {
+  position: absolute; left: -30px; top: 0; bottom: 0; width: 30px;
+  background: linear-gradient(to right, #0d0b00, #1a1500);
+  border-left: 1px solid rgba(255,215,0,0.2);
+  transform-origin: right; transform: rotateY(90deg);
+  display: flex; align-items: center; justify-content: center;
+}
+.book-spine-text {
+  font-family: 'Bebas Neue', sans-serif; font-size: 0.7rem; letter-spacing: 3px;
+  color: rgba(255,215,0,0.4);
+  writing-mode: vertical-rl; text-orientation: mixed;
+  transform: rotate(180deg);
+}
+.book-shadow {
+  position: absolute; bottom: -40px; left: 10%; right: 10%; height: 40px;
+  background: radial-gradient(ellipse, rgba(255,215,0,0.15) 0%, transparent 70%);
+  filter: blur(10px);
+}
+
+/* WHAT'S INSIDE */
+.inside { padding: 6rem 3rem; background: var(--bg2); position: relative; overflow: hidden; }
+.inside::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,215,0,0.3),transparent); }
+.section-wrap { max-width: 1200px; margin: 0 auto; }
+.section-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.9; margin-bottom: 1rem;
+  text-shadow: 3px 3px 0 #222, 5px 5px 0 #111;
+}
+.section-title span { background: linear-gradient(135deg,#FFD700,#FFA500); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.section-desc { font-size: 1rem; color: var(--muted); max-width: 500px; line-height: 1.8; margin-bottom: 3rem; }
+.chapters-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; }
+.chapter-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  padding: 1.8rem; position: relative; overflow: hidden;
+  transition: all 0.35s; cursor: default;
+  transform-style: preserve-3d;
+}
+.chapter-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,215,0,0.04),transparent); opacity:0; transition:opacity 0.3s; }
+.chapter-card::after { content:''; position:absolute; bottom:0; left:0; height:2px; width:0; background:linear-gradient(90deg,#FFD700,#FFA500); transition:width 0.4s; }
+.chapter-card:hover { border-color:rgba(255,215,0,0.4); transform:translateY(-8px) rotateX(2deg); box-shadow:0 20px 50px rgba(255,215,0,0.08), 0 0 0 1px rgba(255,215,0,0.1); }
+.chapter-card:hover::before { opacity:1; }
+.chapter-card:hover::after { width:100%; }
+.ch-num { font-family:'Bebas Neue',sans-serif; font-size:4rem; color:rgba(255,215,0,0.05); position:absolute; top:0.5rem; right:1rem; line-height:1; }
+.ch-level { font-size:0.65rem; letter-spacing:3px; text-transform:uppercase; font-weight:700; margin-bottom:0.8rem; }
+.level-b { color:#00e676; } .level-i { color:#FFD700; } .level-a { color:#FFA500; }
+.ch-title { font-family:'Barlow Condensed',sans-serif; font-size:1.4rem; font-weight:900; margin-bottom:0.6rem; letter-spacing:1px; }
+.ch-desc { font-size:0.85rem; color:var(--muted); line-height:1.7; }
+.ch-topics { margin-top:1rem; display:flex; flex-wrap:wrap; gap:0.3rem; }
+.ch-topic { font-size:0.65rem; padding:0.2rem 0.5rem; border:1px solid rgba(255,215,0,0.15); color:rgba(255,215,0,0.5); letter-spacing:1px; text-transform:uppercase; }
+
+/* TRANSFORMATION SECTION */
+.transform { padding: 6rem 3rem; background: var(--bg); position: relative; overflow: hidden; }
+.transform::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,215,0,0.2),transparent); }
+.transform-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.transform-text {}
+.transform-points { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+.transform-point { display: flex; gap: 1.2rem; align-items: flex-start; }
+.tp-icon { width: 44px; height: 44px; background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.tp-content h4 { font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:900; letter-spacing:1px; text-transform:uppercase; margin-bottom:0.3rem; }
+.tp-content p { font-size:0.85rem; color:var(--muted); line-height:1.6; }
+.timeline { position: relative; }
+.timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,rgba(255,215,0,0.4),rgba(255,215,0,0.1)); }
+.timeline-item { display:flex; gap:2rem; margin-bottom:2rem; position:relative; }
+.tl-dot { width:40px; height:40px; background:linear-gradient(135deg,#FFD700,#FFA500); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:1rem; color:#000; flex-shrink:0; position:relative; z-index:1; box-shadow:0 0 20px rgba(255,215,0,0.3); }
+.tl-content h4 { font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:900; letter-spacing:1px; text-transform:uppercase; margin-bottom:0.3rem; }
+.tl-week { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem; }
+.tl-content p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
+/* PRICING */
+.pricing { padding: 6rem 3rem; background: var(--bg2); position: relative; overflow: hidden; }
+.pricing::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background:radial-gradient(circle,rgba(255,215,0,0.04),transparent 70%); }
+.pricing-inner { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+.pricing-card {
+  background: var(--bg3); border: 1px solid rgba(255,215,0,0.3);
+  padding: 3.5rem; margin-top: 3rem; position: relative; overflow: hidden;
+}
+.pricing-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,#FFD700,#FFA500,transparent); }
+.pricing-card::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,215,0,0.03),transparent); }
+.pricing-content { position: relative; z-index: 1; }
+.pricing-badge { display:inline-block; background:linear-gradient(135deg,#FFD700,#FFA500); color:#000; font-size:0.7rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:0.4rem 1.2rem; margin-bottom:1.5rem; }
+.pricing-name { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:2px; text-shadow:2px 2px 0 #333; margin-bottom:1rem; }
+.pricing-price-row { display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:0.5rem; }
+.price-strike { font-size:1.5rem; color:var(--muted); text-decoration:line-through; }
+.price-main { font-family:'Bebas Neue',sans-serif; font-size:5rem; line-height:1; background:linear-gradient(135deg,#FFD700,#FFA500); -webkit-background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 20px rgba(255,215,0,0.4)); }
+.price-currency { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--gold); line-height:1; align-self:flex-start; margin-top:0.8rem; }
+.price-sub { font-size:0.75rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:2rem; }
+.features-list { list-style:none; display:flex; flex-direction:column; gap:0.8rem; margin-bottom:2.5rem; text-align:left; }
+.features-list li { display:flex; align-items:center; gap:0.8rem; font-size:0.9rem; }
+.features-list li::before { content:'✓'; color:var(--gold); font-weight:700; font-size:1rem; flex-shrink:0; }
+.buy-btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:0.8rem; width:100%; padding:1.3rem 2rem;
+  background:linear-gradient(135deg,#FFD700,#FFA500); color:#000; font-weight:700; font-size:1rem;
+  letter-spacing:2px; text-transform:uppercase; text-decoration:none;
+  box-shadow:0 0 40px rgba(255,215,0,0.4), 4px 4px 0 #8B6914; transition:all 0.25s;
+  position:relative; overflow:hidden;
+}
+.buy-btn:hover { transform:translate(-3px,-3px); box-shadow:0 0 60px rgba(255,215,0,0.6), 7px 7px 0 #8B6914; }
+.buy-guarantee { display:flex; align-items:center; justify-content:center; gap:0.5rem; margin-top:1.5rem; font-size:0.78rem; color:var(--muted); letter-spacing:1px; }
+
+/* TESTIMONIALS */
+.testimonials { padding: 6rem 3rem; background: var(--bg); }
+.test-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.2rem; margin-top:3rem; }
+.test-card { background:var(--bg3); border:1px solid var(--border); padding:2rem; position:relative; transition:all 0.3s; }
+.test-card::before { content:'"'; font-family:'Bebas Neue',sans-serif; font-size:5rem; color:rgba(255,215,0,0.06); position:absolute; top:-0.5rem; left:1rem; line-height:1; }
+.test-card:hover { border-color:rgba(255,215,0,0.2); transform:translateY(-4px); }
+.test-stars { color:var(--gold); font-size:0.9rem; letter-spacing:2px; margin-bottom:0.8rem; }
+.test-text { font-size:0.88rem; color:var(--muted); line-height:1.7; margin-bottom:1.2rem; font-style:italic; }
+.test-author { display:flex; align-items:center; gap:0.8rem; }
+.test-avatar { width:36px; height:36px; background:linear-gradient(135deg,#FFD700,#FFA500); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; color:#000; }
+.test-name { font-size:0.85rem; font-weight:700; }
+.test-handle { font-size:0.72rem; color:var(--muted); letter-spacing:1px; }
+
+/* FAQ */
+.faq { padding: 5rem 3rem; background: var(--bg2); }
+.faq-inner { max-width: 800px; margin: 0 auto; }
+.faq-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 0.8rem; }
+.faq-item { background:var(--bg3); border:1px solid var(--border); overflow:hidden; transition:border-color 0.2s; }
+.faq-item:hover { border-color:rgba(255,215,0,0.2); }
+.faq-q { display:flex; justify-content:space-between; align-items:center; padding:1.2rem 1.5rem; cursor:pointer; font-weight:600; font-size:0.92rem; }
+.faq-q .icon { font-size:1.2rem; color:var(--gold); transition:transform 0.3s; flex-shrink:0; }
+.faq-item.open .faq-q .icon { transform:rotate(45deg); }
+.faq-a { max-height:0; overflow:hidden; transition:max-height 0.3s ease; padding:0 1.5rem; font-size:0.85rem; color:var(--muted); line-height:1.7; }
+.faq-item.open .faq-a { max-height:200px; padding:0 1.5rem 1.2rem; }
+
+/* CTA BANNER */
+.cta-banner {
+  padding: 5rem 3rem; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0d0a00 0%, #050500 100%);
+  border-top: 1px solid rgba(255,215,0,0.1);
+  border-bottom: 1px solid rgba(255,215,0,0.1);
+  text-align: center;
+}
+.cta-banner::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:400px; background:radial-gradient(ellipse,rgba(255,215,0,0.07),transparent 70%); }
+.cta-banner-inner { position:relative; z-index:1; }
+.cta-big { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,7vw,6rem); line-height:0.9; text-shadow:3px 3px 0 #333; margin-bottom:1.5rem; }
+.cta-big span { background:linear-gradient(135deg,#FFD700,#FFA500); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.cta-sub { font-size:1rem; color:var(--muted); margin-bottom:2.5rem; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.7; }
+
+/* FOOTER */
+footer {
+  padding: 3rem; background: var(--bg);
+  border-top: 1px solid rgba(255,215,0,0.08);
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  text-align: center;
+}
+.footer-logo { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:4px; background:linear-gradient(135deg,#FFD700,#FFA500); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.footer-tagline { font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(35px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { opacity:0; transform:translateY(25px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:linear-gradient(#FFD700,#FFA500); }
+
+@media(max-width:768px) {
+  nav { padding:1rem 1.5rem; }
+  .hero { padding:5.5rem 1.5rem 3rem; }
+  .hero-content { grid-template-columns:1fr; gap:3rem; }
+  .hero-right { order:-1; }
+  .book-3d { width:200px; height:270px; }
+  .book-title-cover { font-size:1.6rem; }
+  .transform-inner { grid-template-columns:1fr; gap:3rem; }
+  .inside,.transform,.pricing,.testimonials,.faq,.cta-banner { padding:4rem 1.5rem; }
+  footer { padding:2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SufiSigma</div>
+  <a href="#pricing" class="nav-cta">Get eBook ↓</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-3d-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">The #1 Calisthenics eBook in India</div>
+      <h1 class="hero-title">
+        <span class="line1">MASTER</span>
+        <span class="line2">CALISTHENICS</span>
+        <span class="line3">FROM ZERO</span>
+      </h1>
+      <p class="hero-desc">The complete blueprint to build a powerful, athletic body using nothing but your own bodyweight — from your very first push up to advanced skills like muscle ups and handstands.</p>
+      <div class="hero-price-row">
+        <div>
+          <div class="price-old">₹999</div>
+          <div class="price-new">₹199</div>
+          <div class="price-label">Limited Launch Price</div>
+        </div>
+      </div>
+      <a href="#pricing" class="hero-btn">Download eBook Now <span class="hero-btn-arrow">→</span></a>
+      <div class="hero-trust">
+        <div class="trust-item"><div class="trust-num">150+</div><div class="trust-label">Pages</div></div>
+        <div class="trust-item"><div class="trust-num">25+</div><div class="trust-label">Exercises</div></div>
+        <div class="trust-item"><div class="trust-num">12</div><div class="trust-label">Week Plan</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="book-3d">
+        <div class="book-spine"><div class="book-spine-text">SUFISIGMA × CALISTHENICS</div></div>
+        <div class="book-front">
+          <div class="book-icon">💪</div>
+          <div class="book-title-cover">MASTER CALISTHENICS</div>
+          <div class="book-divider"></div>
+          <div class="book-subtitle-cover">Beginner to Advanced</div>
+          <div class="book-divider"></div>
+          <div class="book-author">by SufiSigma</div>
+        </div>
+        <div class="book-shadow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="inside">
+  <div class="section-wrap">
+    <div class="section-label">Complete Blueprint</div>
+    <h2 class="section-title">WHAT'S <span>INSIDE</span></h2>
+    <p class="section-desc">14 power-packed chapters taking you from absolute beginner to performing elite calisthenics skills — with detailed progressions for every single exercise.</p>
+    <div class="chapters-grid">
+      <div class="chapter-card fade-in"><div class="ch-num">01</div><div class="ch-level level-b">Beginner</div><div class="ch-title">The Foundation</div><div class="ch-desc">Why calisthenics beats gym, understanding your body, setting up your training space, and the mindset required to succeed.</div><div class="ch-topics"><span class="ch-topic">Mindset</span><span class="ch-topic">Body Mechanics</span><span class="ch-topic">Setup</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">02</div><div class="ch-level level-b">Beginner</div><div class="ch-title">Push Up Mastery</div><div class="ch-desc">10 push up variations from standard to one-arm. Every variation explained with proper form cues, common mistakes, and progressions.</div><div class="ch-topics"><span class="ch-topic">10 Variations</span><span class="ch-topic">Form Guide</span><span class="ch-topic">Progressions</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">03</div><div class="ch-level level-b">Beginner</div><div class="ch-title">Pull Power</div><div class="ch-desc">Dead hang to archer pull ups. Build the back and bicep strength that makes you look powerful and prevents injury.</div><div class="ch-topics"><span class="ch-topic">Pull Ups</span><span class="ch-topic">Chin Ups</span><span class="ch-topic">Grip Strength</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">04</div><div class="ch-level level-b">Beginner</div><div class="ch-title">Core & Dips</div><div class="ch-desc">The exercises most beginners skip — and why they make the biggest difference to your physique and performance.</div><div class="ch-topics"><span class="ch-topic">Dips</span><span class="ch-topic">Core Work</span><span class="ch-topic">L-Sit</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">05</div><div class="ch-level level-b">Beginner</div><div class="ch-title">8-Week Starter Plan</div><div class="ch-desc">Your exact day-by-day plan for the first 8 weeks. Sets, reps, rest times, and how to progress week by week.</div><div class="ch-topics"><span class="ch-topic">Full Schedule</span><span class="ch-topic">Progressions</span><span class="ch-topic">Tracking</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">06</div><div class="ch-level level-i">Intermediate</div><div class="ch-title">Unlocking Muscle Up</div><div class="ch-desc">The exact strength prerequisites, technique breakdown, and step-by-step progressions to achieve your first muscle up.</div><div class="ch-topics"><span class="ch-topic">Kipping</span><span class="ch-topic">Strict</span><span class="ch-topic">Ring MU</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">07</div><div class="ch-level level-i">Intermediate</div><div class="ch-title">Handstand Journey</div><div class="ch-desc">Wall handstand to freestanding. The wrist conditioning, shoulder strength, and balance drills to get you there safely.</div><div class="ch-topics"><span class="ch-topic">Wall HS</span><span class="ch-topic">Freestanding</span><span class="ch-topic">HSPU</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">08</div><div class="ch-level level-i">Intermediate</div><div class="ch-title">Nutrition Blueprint</div><div class="ch-desc">What to eat, when to eat, and exactly how much protein you need. Simple, practical nutrition that actually works for Indian food.</div><div class="ch-topics"><span class="ch-topic">Protein</span><span class="ch-topic">Meal Plan</span><span class="ch-topic">Recovery</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">09</div><div class="ch-level level-i">Intermediate</div><div class="ch-title">Injury Prevention</div><div class="ch-desc">The warm up protocols, mobility work, and deload strategies that keep you training for years without breaking down.</div><div class="ch-topics"><span class="ch-topic">Warm Up</span><span class="ch-topic">Mobility</span><span class="ch-topic">Deload</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">10</div><div class="ch-level level-a">Advanced</div><div class="ch-title">Planche Progressions</div><div class="ch-desc">From tuck planche to full planche — the strength requirements, conditioning exercises, and the exact progression map.</div><div class="ch-topics"><span class="ch-topic">Tuck</span><span class="ch-topic">Straddle</span><span class="ch-topic">Full Planche</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">11</div><div class="ch-level level-a">Advanced</div><div class="ch-title">Front Lever & Back Lever</div><div class="ch-desc">The gymnastic skills that will make people stop and stare. Detailed progressions for both skills from zero to full position.</div><div class="ch-topics"><span class="ch-topic">Front Lever</span><span class="ch-topic">Back Lever</span><span class="ch-topic">Progressions</span></div></div>
+      <div class="chapter-card fade-in"><div class="ch-num">12</div><div class="ch-level level-a">Advanced</div><div class="ch-title">The Elite 12-Week Plan</div><div class="ch-desc">Your complete advanced training program. 5 days a week with skill work, strength blocks, and conditioning. The ultimate blueprint.</div><div class="ch-topics"><span class="ch-topic">Full Program</span><span class="ch-topic">Periodization</span><span class="ch-topic">Peak Week</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORMATION -->
+<section class="transform">
+  <div class="transform-inner">
+    <div class="transform-text fade-in">
+      <div class="section-label">The Journey</div>
+      <h2 class="section-title">YOUR 12-WEEK<br><span style="background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">TRANSFORMATION</span></h2>
+      <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;margin-top:1rem;max-width:440px;">This is not a miracle promise. This is a proven system. Follow it exactly and your body and mind will change in ways you cannot imagine right now.</p>
+      <div class="transform-points">
+        <div class="transform-point"><div class="tp-icon">💪</div><div class="tp-content"><h4>Real Strength</h4><p>Not just aesthetic — functional, usable strength that carries into everything you do in life.</p></div></div>
+        <div class="transform-point"><div class="tp-icon">🧠</div><div class="tp-content"><h4>Mental Discipline</h4><p>The consistency required to master calisthenics builds the kind of discipline money cannot buy.</p></div></div>
+        <div class="transform-point"><div class="tp-icon">🔥</div><div class="tp-content"><h4>Zero Equipment</h4><p>Your living room, a park, a bar — that is all you need. No gym fee. No excuses. Just results.</p></div></div>
+      </div>
+    </div>
+    <div class="timeline fade-in">
+      <div class="timeline-item"><div class="tl-dot">W1</div><div class="tl-content"><div class="tl-week">Week 1-2</div><h4>Foundation Built</h4><p>Form locked in. First pull ups done. Body adapting. You feel it already.</p></div></div>
+      <div class="timeline-item"><div class="tl-dot">W4</div><div class="tl-content"><div class="tl-week">Week 3-4</div><h4>Visible Changes</h4><p>Back muscles showing. Push up numbers doubled. Friends are noticing.</p></div></div>
+      <div class="timeline-item"><div class="tl-dot">W6</div><div class="tl-content"><div class="tl-week">Week 5-6</div><h4>Skill Unlocked</h4><p>First kipping muscle up attempt. Handstand against wall for 30+ seconds.</p></div></div>
+      <div class="timeline-item"><div class="tl-dot">W8</div><div class="tl-content"><div class="tl-week">Week 7-8</div><h4>Strength Surge</h4><p>Strict muscle up within reach. Physique completely transformed. Mindset unbreakable.</p></div></div>
+      <div class="timeline-item"><div class="tl-dot">W12</div><div class="tl-content"><div class="tl-week">Week 9-12</div><h4>Elite Territory</h4><p>Skills others cannot imagine. A body built entirely by you. No gym, no equipment, no limits.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-inner">
+    <div class="section-label">Get Instant Access</div>
+    <h2 class="section-title fade-in">ONE <span style="background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">INVESTMENT.</span><br>LIFETIME RESULTS.</h2>
+    <div class="pricing-card fade-in">
+      <div class="pricing-content">
+        <div class="pricing-badge">★ Most Popular ★</div>
+        <div class="pricing-name">COMPLETE CALISTHENICS EBOOK</div>
+        <div class="pricing-price-row">
+          <div class="price-strike">₹999</div>
+          <div style="display:flex;align-items:flex-start;gap:0.2rem">
+            <div class="price-currency">₹</div>
+            <div class="price-main">199</div>
+          </div>
+        </div>
+        <div class="price-sub">One-time payment · Instant PDF download</div>
+        <ul class="features-list">
+          <li>150+ pages of detailed, actionable content</li>
+          <li>12 beginner chapters with full photo descriptions</li>
+          <li>Step-by-step muscle up & handstand progressions</li>
+          <li>8-week beginner plan + 12-week advanced plan</li>
+          <li>Complete nutrition guide for Indian diet</li>
+          <li>Injury prevention & recovery protocols</li>
+          <li>Advanced skills: Planche, Front Lever, Back Lever</li>
+          <li>Lifetime access — download once, keep forever</li>
+        </ul>
+        <a href="mailto:sufisigma@gmail.com?subject=eBook Purchase&body=I want to buy the Calisthenics eBook for ₹199. Please send UPI/payment details." class="buy-btn">
+          💳 Buy Now — Only ₹199
+        </a>
+        <div class="buy-guarantee">🔒 Safe & Secure · Instant Delivery · 100% Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-wrap">
+    <div class="section-label">Real Results</div>
+    <h2 class="section-title fade-in">WHAT PEOPLE<br><span style="background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">ARE SAYING</span></h2>
+    <div class="test-grid">
+      <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"Maine 3 mahine mein pehla strict muscle up maara. Ye guide bilkul seedha aur practical hai. Gym ki zaroorat hi nahi padi."</p><div class="test-author"><div class="test-avatar">A</div><div><div class="test-name">Arjun S.</div><div class="test-handle">Delhi · 3 months</div></div></div></div>
+      <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"Nutrition section ne meri soch badal di. Indian food ke saath itna asaan hai protein hit karna — ye pehle kisi ne nahi bataya."</p><div class="test-author"><div class="test-avatar">R</div><div><div class="test-name">Riya M.</div><div class="test-handle">Mumbai · 6 months</div></div></div></div>
+      <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"Rs 199 mein itna content? Seriously one of the best investments I've made. Handstand practice se mera core bhi insane ho gaya."</p><div class="test-author"><div class="test-avatar">K</div><div><div class="test-name">Kabir T.</div><div class="test-handle">Pune · 4 months</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-inner">
+    <div class="section-label">Questions Answered</div>
+    <h2 class="section-title fade-in">COMMON <span style="background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">QUESTIONS</span></h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Kya ye eBook beginners ke liye bhi hai?</span><span class="icon">+</span></div><div class="faq-a">Bilkul. eBook specifically designed hai un logo ke liye jo pehli baar start kar rahe hain. Chapter 1 se shuru hota hai zero se — aur phir advanced skills tak jaata hai. Har ek apni pace pe follow kar sakta hai.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Equipment ki zaroorat hai?</span><span class="icon">+</span></div><div class="faq-a">Minimal. Ek pull up bar (jo Rs 300-500 mein milta hai) kaafi hai. Push ups aur dips floor aur chair se ho jaate hain. Advanced skills ke liye bhi koi gym equipment nahi chahiye.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Payment kaise karein?</span><span class="icon">+</span></div><div class="faq-a">Buy Now button click karo — ek email khulega. UPI ya bank transfer se payment karke confirmation bhejo. 24 ghante ke andar PDF aapke email par aa jaayegi.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Kitne time mein results dekhenge?</span><span class="icon">+</span></div><div class="faq-a">Week 2-3 mein form improve hoti hai. Week 4-6 mein visible muscle changes aate hain. Week 8-12 mein skills like muscle up unlock hote hain — agar plan consistently follow karo toh.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Kya PDF phone pe padhna easy hai?</span><span class="icon">+</span></div><div class="faq-a">Haan. PDF mobile-optimized hai. Android ya iPhone dono pe clearly padhta hai. Ek baar download karo — internet ke bina bhi use kar sakte ho.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <h2 class="cta-big">STOP WAITING.<br><span>START TRAINING.</span></h2>
+    <p class="cta-sub">Har din jo tum wait karte ho, woh ek din peeche jaata hai. ₹199 mein apni puri fitness journey ka blueprint lo — aaj.</p>
+    <a href="#pricing" class="hero-btn" style="animation:none;display:inline-flex;">Get the eBook → ₹199</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SufiSigma</div>
+  <div class="footer-tagline">No Gym. No Excuses. No Limits.</div>
+  <div style="font-size:0.72rem;color:var(--muted);letter-spacing:1px;">© 2025 SufiSigma · sufisigma.github.io</div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 60);
+});
+
+// Particles
+function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 1;
+    p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;opacity:${Math.random()*0.6+0.1}`;
+    container.appendChild(p);
+  }
+}
+createParticles();
+
+// Scroll fade-in
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// FAQ
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
